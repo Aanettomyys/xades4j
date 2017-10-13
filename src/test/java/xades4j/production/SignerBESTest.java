@@ -17,6 +17,7 @@
 package xades4j.production;
 
 import java.io.File;
+import org.junit.Ignore;
 import xades4j.algorithms.EnvelopedSignatureTransform;
 import xades4j.properties.DataObjectDesc;
 import xades4j.properties.AllDataObjsCommitmentTypeProperty;
@@ -69,6 +70,7 @@ public class SignerBESTest extends SignerTestBase
     }
 
     @Test
+    @Ignore
     public void testSignBESExtrnlRes() throws Exception
     {
         System.out.println("signBESExtrnlRes");

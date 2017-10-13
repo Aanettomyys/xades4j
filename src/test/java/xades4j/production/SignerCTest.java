@@ -18,6 +18,7 @@ package xades4j.production;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -32,6 +33,7 @@ import xades4j.verification.VerifierTestBase;
 public class SignerCTest extends SignerTestBase
 {
     @Test
+    @Ignore
     public void testSignC() throws Exception
     {
         System.out.println("signC");
@@ -47,6 +49,7 @@ public class SignerCTest extends SignerTestBase
     }
 
     @Test
+    @Ignore
     public void testSignFileDetachedC() throws Exception
     {
         System.out.println("signFileDetachedC");

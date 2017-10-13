@@ -16,6 +16,10 @@
  */
 package xades4j.providers;
 
+import java.security.cert.X509Certificate;
+import org.apache.xml.security.exceptions.XMLSecurityException;
+import org.apache.xml.security.keys.content.X509Data;
+
 /**
  * Provides basic signature options such as whether {@code ds:KeyInfo} elements
  * should be included.
@@ -48,4 +52,15 @@ public interface BasicSignatureOptionsProvider
      * @return {@code true} if the certificate should be signed; false otherwise
      */
     boolean signSigningCertificate();
+    
+    /**
+     * Explicity handling which data should be included in {@code X509Data} of
+     * {@code ds:KeyInfo} since only one of Certificate/Issuer/SubjectName 
+     * is mandatory.
+     * @param data the X509Data block of {@code ds:KeyInfo}
+     * @param certificate the certificate for which data is generating
+     * @throws org.apache.xml.security.exceptions.XMLSecurityException
+     */
+    void handleX509Data(X509Data data, X509Certificate certificate) 
+            throws XMLSecurityException;
 }

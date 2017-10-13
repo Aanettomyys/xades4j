@@ -64,6 +64,7 @@ public class SignerTestBase extends SignatureServicesTestBase
             boolean returnFullChain) throws KeyStoreException
     {
         keyStorePath = toPlatformSpecificCertDirFilePath(keyStorePath);
+        assumeTrue(new File(keyStorePath).exists());
         return new FileSystemKeyStoreKeyingDataProvider(keyStoreType, keyStorePath,
                 new FirstCertificateSelector(),
                 new DirectPasswordProvider(keyStorePwd),

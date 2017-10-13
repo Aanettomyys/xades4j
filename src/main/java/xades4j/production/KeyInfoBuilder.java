@@ -81,9 +81,7 @@ class KeyInfoBuilder
             try
             {
                 X509Data x509Data = new X509Data(xmlSig.getDocument());
-                x509Data.addCertificate(signingCertificate);
-                x509Data.addSubjectName(signingCertificate);
-                x509Data.addIssuerSerial(signingCertificate.getIssuerX500Principal().getName(), signingCertificate.getSerialNumber());
+                this.basicSignatureOptionsProvider.handleX509Data(x509Data, signingCertificate);
                 xmlSig.getKeyInfo().add(x509Data);
 
                 if (this.basicSignatureOptionsProvider.signSigningCertificate())

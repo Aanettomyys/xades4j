@@ -17,10 +17,13 @@
 package xades4j.production;
 
 import java.io.FileInputStream;
+import java.math.BigInteger;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import junit.framework.Assert;
+import org.apache.xml.security.exceptions.XMLSecurityException;
 import org.apache.xml.security.keys.content.KeyValue;
+import org.apache.xml.security.keys.content.X509Data;
 import org.apache.xml.security.keys.content.x509.XMLX509Certificate;
 import org.apache.xml.security.signature.SignedInfo;
 import org.apache.xml.security.signature.XMLSignature;
@@ -50,6 +53,17 @@ public class KeyInfoBuilderTest extends SignatureServicesTestBase
             this.includeSigningCertificate = includeSigningCertificate;
             this.includePublicKey = includePublicKey;
             this.signSigningCertificate = signSigningCertificate;
+        }
+
+        @Override
+        public void handleX509Data(X509Data data, X509Certificate certificate) 
+                throws XMLSecurityException
+        {
+            String issuerName = certificate.getIssuerX500Principal().getName();
+            BigInteger serialNumber =  certificate.getSerialNumber();
+            data.addCertificate(certificate);
+            data.addSubjectName(certificate);
+            data.addIssuerSerial(issuerName, serialNumber);
         }
 
         @Override

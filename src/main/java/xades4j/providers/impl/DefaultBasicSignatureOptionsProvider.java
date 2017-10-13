@@ -16,6 +16,10 @@
  */
 package xades4j.providers.impl;
 
+import java.math.BigInteger;
+import java.security.cert.X509Certificate;
+import org.apache.xml.security.exceptions.XMLSecurityException;
+import org.apache.xml.security.keys.content.X509Data;
 import xades4j.providers.BasicSignatureOptionsProvider;
 
 /**
@@ -46,6 +50,17 @@ public class DefaultBasicSignatureOptionsProvider implements BasicSignatureOptio
         this.includeSigningCertificate = includeSigningCertificate;
         this.includePublicKey = includePublicKey;
         this.signSigningCertificate = signSigningCertificate;
+    }
+
+    @Override
+    public void handleX509Data(X509Data data, X509Certificate certificate) 
+            throws XMLSecurityException
+    {
+        String issuerName = certificate.getIssuerX500Principal().getName();
+        BigInteger serialNumber =  certificate.getSerialNumber();
+        data.addCertificate(certificate);
+        data.addSubjectName(certificate);
+        data.addIssuerSerial(issuerName, serialNumber);      
     }
     
     @Override
